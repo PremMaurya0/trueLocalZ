@@ -43,3 +43,66 @@ function readResponse(response) {
 export const login = (params) => {
     return axios.post(`/login`, params).then(response => readResponse(response)).catch(error => { throw readError(error); });
 }
+// Add New Area
+export const addArea = (params) => {
+    return axios.post(`/addArea`, params).then(response => readResponse(response)).catch(error => { throw readError(error); });
+}
+
+// Area List
+export const areaList = async() => {
+    return  await axios.get(`/areaList`).then(response => readResponse(response)).catch(error => { throw readError(error); });
+}
+// Add New bike
+export const addBike = (params) => {
+    return axios.post(`/addVechile`, params).then(response => readResponse(response)).catch(error => { throw readError(error); });
+}
+// Vehicle List
+export const VList = async() => {
+    return  await axios.get(`/vechileList`).then(response => readResponse(response)).catch(error => { throw readError(error); });
+}
+// Single area
+export const SingleArea = async(params) => {
+    return  await axios.post(`/areaSingle`,params).then(response => readResponse(response)).catch(error => { throw readError(error); });
+}
+// Assign/Re-Assign Vehicle
+export const updateVechile = async(params) => {
+    return  await axios.post(`/updateVechile`,params,{
+        headers: {
+            'Content-Type': 'application/json',
+        } }).then(response => readResponse(response)).catch(error => { throw readError(error); });
+}
+//  Vehicle view
+export const viewVechile = async(params) => {
+    return  await axios.post(`/vechileSingle`,params,{
+        headers: {
+            'Content-Type': 'application/json',
+        } }).then(response => readResponse(response)).catch(error => { throw readError(error); });
+}
+//  Vehicle Edit
+export const editVechile = async(params) => {
+    return  await axios.post(`/vechileEdit`,params,{
+        headers: {
+            'Content-Type': 'application/json',
+        } }).then(response => readResponse(response)).catch(error => { throw readError(error); });
+}
+//  Vehicle Delete
+export const deleteVechile = async(params) => {
+    return  await axios.post(`/vechileDelete`,params,{
+        headers: {
+            'Content-Type': 'application/json',
+        } }).then(response => readResponse(response)).catch(error => { throw readError(error); });
+}
+
+export const areaSingle = async(params) => {
+    return  await axios.post(`/areaSingle`,params,{
+        headers: {
+            'Content-Type': 'application/json',
+        } }).then(response => readResponse(response)).catch(error => { throw readError(error); });
+}
+
+// Add New driver
+export const addDriver = async(params) => {
+    return await axios.post(`/addDriver`, params,{headers: {
+        'Content-Type': 'application/json',
+    }}).then(response => readResponse(response)).catch(error => { throw readError(error); });
+}

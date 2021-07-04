@@ -6,18 +6,18 @@ import Sidebar from '../../components/Sidebar'
 
 
 
-function AddBike(){
+function EditVehicle(props){
+    const { id } = props.match.params;
+    
 
 const [objectData,setDevice]=useState({
-    DeviceId:"",
-    modelname:"",
-    vechileNumber:"",
-    chissisnumber:"",
-    areaId:0,
-    lat:0,
-    lng:0,
-    status:0
+   
 });
+        useEffect(()=>{
+
+            list(id);
+        },[]);
+    
 let name,value;
 
 const handleInput = (e)=>{
@@ -27,6 +27,22 @@ const handleInput = (e)=>{
   setDevice({...objectData,[name]:value});
 
 }
+const list=(id)=>{
+    let data={
+        id:id
+    };
+
+    ApisService.viewVechile(JSON.stringify({'vehicleobj':data}))
+    .then(response => {
+       console.log(response)
+       setDevice(response);
+    }).catch(error => {
+     
+      console.log(error);
+     // GlobalProvider.errorMessage(error);
+    
+    });
+  }
 
 
 const submit=()=>{
@@ -34,16 +50,16 @@ const submit=()=>{
     console.log(objectData);
     //let objectData=device;
 
-    ApisService.addBike(objectData)
+    ApisService.editVechile(JSON.stringify({'vehicleobj':objectData}))
     .then(response => {
-      clearState();
-      console.log(response.message);
-       if(response.error === false) {
-         GlobalProvider.successMessage(response.message);
+     // clearState();
+      console.log(response);
+    //    if(response.error === false) {
+    //      GlobalProvider.successMessage(response.message);
          
-       } else {
-         GlobalProvider.errorMessage(response.message);  
-       }
+    //    } else {
+    //      GlobalProvider.errorMessage(response.message);  
+    //    }
       
     }).catch(error => {
      
@@ -94,7 +110,7 @@ const clearState = () => {
         <div className="col-12 col-md-8 col-lg-8 col-xl-6">
           <div className="row">
             <div className="col text-center">
-              <h3>Add Vehicle</h3>
+              <h3>Edit Vehicle</h3>
              </div>
           </div>
           <form method="Post">
@@ -144,4 +160,4 @@ const clearState = () => {
     )
 }
 
-export default AddBike
+export default EditVehicle
